@@ -43,14 +43,14 @@
 //   return user
 // }
 
-// import { neon } from '@neondatabase/serverless'
+import { neon } from '@neondatabase/serverless'
 
-import postgres from 'postgres'
+// import postgres from 'postgres'
 
 // // Initialize Neon SQL client
-// const sql = neon(process.env.DATABASE_URL!)
+const sql = neon(process.env.DATABASE_URL!)
 
-const sql = postgres(process.env.DATABASE_URL!)
+// const sql = postgres(process.env.DATABASE_URL!)
 
 // User types and functions
 export interface User {
@@ -245,6 +245,7 @@ export interface Project {
   description: string
   image_url: string | null
   demo_url: string | null
+  category : string | null
   github_url: string | null
   technologies: string[]
   featured: boolean
@@ -454,4 +455,27 @@ export async function unsubscribeNewsletter(email: string): Promise<void> {
     SET subscribed = false, unsubscribed_at = CURRENT_TIMESTAMP
     WHERE email = ${email}
   `
+}
+
+export interface Education {
+  id: string
+  institution: string
+  degree: string
+  field_of_study: string | null
+  location: string | null
+  start_date: string // DATE → string in JS
+  end_date: string | null
+  is_current: boolean
+  description: string | null
+  grade: string | null
+  order_index: number
+  created_at: string
+  updated_at: string
+}
+export async function getEducation() {
+  const result = await sql`
+    SELECT * FROM education 
+    ORDER BY start_date DESC
+  `
+  return result as Education[]
 }
