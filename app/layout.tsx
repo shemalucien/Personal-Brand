@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
+import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
@@ -40,17 +41,34 @@ export const metadata: Metadata = {
   },
 }
 
+// export default function RootLayout({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode
+// }>) {
+//   return (
+//     <html lang="en">
+//       <body className={`font-sans antialiased`}>
+//         {children}
+//         <Analytics />
+//       </body>
+//     </html>
+//   )
+// }
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className="font-sans antialiased">
+        <ThemeProvider defaultTheme="system">
+          {children}
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>
-  )
+  );
 }

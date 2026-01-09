@@ -3,8 +3,12 @@ import { AboutSection } from "@/components/about-section"
 import { ExperienceSection } from "@/components/experience-section"
 import { SkillsSection } from "@/components/skills-section"
 import { ProjectsSection } from "@/components/projects-section"
-import { ContactSection } from "@/components/contact-section"
+// import { ContactSection } from "@/components/contact-section"
+
 import { Navigation } from "@/components/navigation"
+import { Services } from "@/components/services"
+import { Testimonials } from "@/components/testimonials"
+import ContactSection from "@/components/contact-section"
 
 export default function Home() {
   return (
@@ -14,6 +18,8 @@ export default function Home() {
       <AboutSection />
       <ExperienceSection />
       <SkillsSection />
+      <Services />
+      <Testimonials />
       <ProjectsSection />
       <ContactSection />
     </main>
